@@ -2,146 +2,112 @@
 'Y00599440'
 'Comp-3900'
 
+Imports System.Data.Common
 Imports MySql.Data.MySqlClient
 Imports Mysqlx.XDevAPI.Relational
 
 Public Class Cliente
-    Dim conn As New MySqlConnection("server=localhost;username=root;password=;database=ventagaming")
+    Dim conn As New MySqlConnection("server=localhost;username=root;password=;database=ventagaming2")
     Dim i As Integer
-
-
-
+    Property venderdorid As Integer
+    Private lol As New vendedor
 
     Public Sub saves()
+
+
         Try
             conn.Open()
 
-            '' Verificar si Txt_id.Text está vacío o no es un número entero válido.
-            'If String.IsNullOrEmpty(Txt_id.Text) OrElse Not IsNumeric(Txt_id.Text) Then
-            '    MessageBox.Show("El campo ID debe contener un número entero válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            '    Return ' Salir del método si hay un error.
-            'End If
-
-            'If String.IsNullOrEmpty(Txt_numeroid.Text) OrElse Not IsNumeric(Txt_id.Text) Then
-            '    MessageBox.Show("El campo number id debe contener un número.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            '    Return ' Salir del método si hay un error.
-            'End If
+            Dim cmd As New MySqlCommand("INSERT INTO `tbl_cliente` (`Apellido_paterno`, `Apellidos_materna`, `Nombre`, `Inicial`, `Dirección_fisica`, `Dirección_postal`, `Pueblo`, `Zip_code`, `Fecha_nacimiento`, `Numero_celular`, `Email`, `Nombre_compañía`, `Cuota_cliente`,`id_vendedor`) VALUES (@Apellido_paterno, @Apellidos_materna, @Nombre, @Inicial, @Dirección_fisica, @Dirección_postal, @Pueblo, @Zip_code, @Fecha_Nacimiento, @Numero_celular, @Email, @Nombre_compañía, @Cuota_cliente,@id_vendedor)", conn)
 
 
+            Dim apellido_paterno As String = Txt_apellidopaterno.Text.Trim()
 
-
-
-
-
-
-
-
-            Dim cmd As New MySqlCommand("INSERT INTO `tbl_cliente`(`id_cliente`, `Numero_empleado`, `Apellidos_paterno`, `Apellidos_materna`, `Nombre`, `Inicial`, `Dirección_física`, `Dirección_postal`, `Pueblo`, `Zip_code`, `Fecha_Nacimiento`, `Número_celular`, `Email`, `nombre_compañía`, `Cuota_cliente`, `id_vendedor`) VALUES (@id_cliente, @Numero_empleado, @Apellidos_paterno, @Apellidos_materna, @Nombre, @Inicial, @Dirección_física, @Dirección_postal, @Pueblo, @Zip_code, @Fecha_Nacimiento, @Número_celular, @Email, @nombre_compañía, @Cuota_cliente, @id_vendedor)", conn)
-
-            'cmd.Parameters.AddWithValue("@id_cliente", CInt(Txt_id.Text))
-            'cmd.Parameters.AddWithValue("@Numero_empleado", Txt_numeroid.Text)
-            'cmd.Parameters.AddWithValue("@Apellidos_paterno", Txt_apellidopaterno.Text)
-
-            'Esto es del apellido que lo pide si esta vacio'
-            Dim lastpaterno As String = Txt_apellidopaterno.Text.Trim()
-
-            If String.IsNullOrEmpty(lastpaterno) Then
+            If String.IsNullOrEmpty(apellido_paterno) Then
                 MessageBox.Show("El apellido paterno no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            ElseIf Not lastpaterno.All(Function(c) Char.IsLetterOrDigit(c)) Then
-                MessageBox.Show("El apellido paterno debe contener letras", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ElseIf Not apellido_paterno.All(Function(c) Char.IsLetterOrDigit(c)) Then
+                MessageBox.Show("El apellido paterno debe contener solo letras y/o dígitos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
-                cmd.Parameters.AddWithValue("@Apellidos_paterno", lastpaterno)
+                cmd.Parameters.AddWithValue("@Apellido_paterno", apellido_paterno)
             End If
 
-            'Esto del materno lo mismo que hace parterno
-            Dim lastmaterno As String = Txt_apellidomaterno.Text.Trim
-            If String.IsNullOrEmpty(lastmaterno) Then
-                MessageBox.Show("El apellido materno no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            ElseIf Not lastpaterno.All(Function(c) Char.IsLetterOrDigit(c)) Then
-                MessageBox.Show("El apellido de materno debe contener letras", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim lastmaterna As String = Txt_apellidomaterno.Text.Trim()
+            If String.IsNullOrEmpty(lastmaterna) Then
+                MessageBox.Show("El apellido materna no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ElseIf Not lastmaterna.All(Function(c) Char.IsLetterOrDigit(c)) Then
+                MessageBox.Show("El apellido materna debe contener letras", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
-                cmd.Parameters.AddWithValue("@Apellidos_materno", lastmaterno)
+                cmd.Parameters.AddWithValue("@Apellidos_materna", lastmaterna)
             End If
 
-            Dim nombre As String = Txt_apellidomaterno.Text.Trim
-            If String.IsNullOrEmpty(nombre) Then
+            Dim name As String = Txt_nombre.Text.Trim()
+            If String.IsNullOrEmpty(name) Then
                 MessageBox.Show("El nombre no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            ElseIf Not nombre.All(Function(c) Char.IsLetterOrDigit(c)) Then
-                MessageBox.Show("El nombre ddebe contener letras", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ElseIf Not name.All(Function(c) Char.IsLetterOrDigit(c)) Then
+                MessageBox.Show("El nombre debe contener letras", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
-                cmd.Parameters.AddWithValue("@Nombre", nombre)
+                cmd.Parameters.AddWithValue("@Nombre", name)
             End If
 
-
-            Dim inicial As String = Txt_inicial.Text.Trim
+            Dim inicial As String = Txt_inicial.Text.Trim()
             If String.IsNullOrEmpty(inicial) Then
-                MessageBox.Show("La inicial no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            ElseIf Not nombre.All(Function(c) Char.IsLetterOrDigit(c)) Then
-                MessageBox.Show("La inicial debe contener letras", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("El inicial no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ElseIf Not inicial.All(Function(c) Char.IsLetterOrDigit(c)) Then
+                MessageBox.Show("El inicial debe contener letras", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
-                cmd.Parameters.AddWithValue("@Inicial", nombre)
+                cmd.Parameters.AddWithValue("@Inicial", inicial)
             End If
 
-            Dim derfisica As String = Txt_direccionfisica.Text.Trim
-            If String.IsNullOrEmpty(derfisica) Then
-                MessageBox.Show("La direccion fisica no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            ElseIf Not derfisica.All(Function(c) Char.IsLetterOrDigit(c)) Then
-                MessageBox.Show("La direccion fisica debe contener letras", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim dfisica As String = Txt_direccionfisica.Text.Trim()
+
+            If String.IsNullOrEmpty(dfisica) Then
+                MessageBox.Show("El direcccion fisica no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
             Else
-                cmd.Parameters.AddWithValue("@Direccion_física", derfisica)
+                cmd.Parameters.AddWithValue("@Dirección_fisica", dfisica)
             End If
 
-            Dim derpost As String = Txt_direccionpostal.Text.Trim
-            If String.IsNullOrEmpty(derpost) Then
-                MessageBox.Show("La direccion postal no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            ElseIf Not derpost.All(Function(c) Char.IsLetterOrDigit(c)) Then
-                MessageBox.Show("La direccion postal debe contener letras", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim dportal As String = Txt_direccionpostal.Text.Trim()
+
+            If String.IsNullOrEmpty(dportal) Then
+                MessageBox.Show("El direccion postal no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
             Else
-                cmd.Parameters.AddWithValue("@Direccion_postal", derpost)
+                cmd.Parameters.AddWithValue("@Dirección_postal", dportal)
             End If
 
+            Dim pueblo As String = Txt_pueblo.Text.Trim()
 
-
-            Dim pueblo As String = Txt_pueblo.Text.Trim
             If String.IsNullOrEmpty(pueblo) Then
                 MessageBox.Show("El pueblo no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            ElseIf Not derpost.All(Function(c) Char.IsLetterOrDigit(c)) Then
-                MessageBox.Show("El pueblo debe contener letras", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+
             Else
                 cmd.Parameters.AddWithValue("@Pueblo", pueblo)
             End If
 
-
-            'cmd.Parameters.AddWithValue("@Apellidos_materna", Txt_apellidomaterno.Text)
-            'cmd.Parameters.AddWithValue("@Nombre", Txt_nombre.Text)
-            'cmd.Parameters.AddWithValue("@Inicial", Txt_inicial.Text)
-            'cmd.Parameters.AddWithValue("@Dirección_física", Txt_direccionfisica.Text)
-            'cmd.Parameters.AddWithValue("@Dirección_postal", Txt_direccionpostal.Text)
-            'cmd.Parameters.AddWithValue("@Pueblo", Txt_pueblo.Text)
-
-            ' Asegurarse de que el Zip Code sea un número.
             Dim zipCode As Integer
-            If Integer.TryParse(Txt_zipcode.Text, zipCode) Then
+
+            If Decimal.TryParse(Txt_zipcode.Text, zipCode) Then
+                ' Si la conversión es exitosa, asigna el valor al parámetro del comando.
                 cmd.Parameters.AddWithValue("@Zip_code", zipCode)
             Else
-                ' Manejar el caso en el que el Zip Code no sea un número válido.
-                MessageBox.Show("El código postal debe ser un número válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return ' Salir del método si hay un error.
+                ' Manejar el caso en el que el ZipCode no sea un número entero válido.
+                If String.IsNullOrEmpty(Txt_zipcode.Text) Then
+                    ' Muestra un mensaje si el ZipCode está vacío.
+                    MessageBox.Show("El ZipCode no puede estar vacío.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    ' Muestra un mensaje si el ZipCode no es un número entero válido.
+                    MessageBox.Show("El ZipCode debe ser un número entero válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+                ' Salir del método si hay un error.
+                Return
             End If
 
 
+            cmd.Parameters.AddWithValue("@Fecha_nacimiento", CDate(DateTime.Value.Date))
+            cmd.Parameters.AddWithValue("@Numero_celular", Txt_celular.Text)
 
-            cmd.Parameters.AddWithValue("@Fecha_Nacimiento", CDate(DateTime.Value.Date))
-
-
-
-            cmd.Parameters.AddWithValue("@Número_celular", Txt_celular.Text)
-
-            'cmd.Parameters.AddWithValue("@Email", Txt_email.Text)
-
-
-
-            'Esto es del correo cuando esta vacio
             Dim email As String = Txt_email.Text.Trim
 
             If String.IsNullOrEmpty(email) Then
@@ -152,55 +118,51 @@ Public Class Cliente
                 cmd.Parameters.AddWithValue("@Email", email)
             End If
 
+            Dim depart As String = Txt_nombrecompañia.Text.Trim()
+            If String.IsNullOrEmpty(depart) Then
+                MessageBox.Show("El nombre de compañia no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
-
-
-
-
-
-            Dim nombrecompañia As String = Txt_nombrecompañia.Text.Trim
-            If String.IsNullOrEmpty(nombrecompañia) Then
-                MessageBox.Show("El nombre de la compañia no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            ElseIf Not derpost.All(Function(c) Char.IsLetterOrDigit(c)) Then
-                MessageBox.Show("El nombre de la compañia debe contener letras", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
-                cmd.Parameters.AddWithValue("@nombre_compañia", pueblo)
+                cmd.Parameters.AddWithValue("@Nombre_compañía", depart)
             End If
 
+            Dim cuota As Decimal
 
-            'cmd.Parameters.AddWithValue("@nombre_compañía", Txt_nombrecompañia.Text)
-
-            ' Asegurarse de que la Cuota del cliente sea un número decimal.
-            Dim cuotaCliente As Decimal
-
-            If Decimal.TryParse(Txt_coutacliente.Text, cuotaCliente) Then
-                cmd.Parameters.AddWithValue("@Cuota_cliente", cuotaCliente)
+            If Decimal.TryParse(Txt_coutacliente.Text, cuota) Then
+                ' Si la conversión es exitosa, asigna el valor al parámetro del comando.
+                cmd.Parameters.AddWithValue("@Cuota_cliente", cuota)
             Else
-                ' Manejar el caso en el que la cuota del cliente no sea un número decimal válido.
+                ' Manejar el caso en el que el ZipCode no sea un número entero válido.
                 If String.IsNullOrEmpty(Txt_coutacliente.Text) Then
-                    MessageBox.Show("La cuota del cliente no puede estar vacía.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    ' Muestra un mensaje si el ZipCode está vacío.
+                    MessageBox.Show("La cuota del cliente no puede estar vacío.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
-                    MessageBox.Show("La cuota del cliente debe ser un número decimal válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    ' Muestra un mensaje si el ZipCode no es un número entero válido.
+                    MessageBox.Show("La cuota del cliente debe ser un número entero válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
-                Return ' Salir del método si hay un error.
+                ' Salir del método si hay un error.
+                Return
             End If
 
-
-
+            cmd.Parameters.AddWithValue("@id_vendedor", venderdorid)
 
             i = cmd.ExecuteNonQuery()
 
             If i > 0 Then
                 MessageBox.Show("Registro de cliente fue salvado!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                clear()
             Else
                 MessageBox.Show("Registro de cliente no fue salvado!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
+
         Catch ex As Exception
             MsgBox(ex.Message)
         Finally
             conn.Close()
+            vendedor.DBV_Load()
         End Try
     End Sub
+
 
 
     Private Function IsValidEmail(ByVal email As String) As Boolean
@@ -266,30 +228,29 @@ Public Class Cliente
     End Sub
 
     Private Sub Btn_clear_Click(sender As Object, e As EventArgs) Handles Btn_clear.Click
-        clear()
-        'If String.IsNullOrEmpty(Txt_id.Text) AndAlso String.IsNullOrEmpty(Txt_numeroid.Text) AndAlso String.IsNullOrEmpty(Txt_apellidopaterno.Text) AndAlso String.IsNullOrEmpty(Txt_apellidomaterno.Text) AndAlso String.IsNullOrEmpty(Txt_celular.Text) AndAlso String.IsNullOrEmpty(Txt_coutacliente.Text) AndAlso String.IsNullOrEmpty(Txt_direccionfisica.Text) AndAlso String.IsNullOrEmpty(Txt_direccionpostal.Text) AndAlso String.IsNullOrEmpty(Txt_email.Text) AndAlso String.IsNullOrEmpty(Txt_inicial.Text) AndAlso String.IsNullOrEmpty(Txt_nombre.Text) AndAlso String.IsNullOrEmpty(Txt_nombrecompañia.Text) AndAlso String.IsNullOrEmpty(Txt_pueblo.Text) AndAlso String.IsNullOrEmpty(Txt_zipcode.Text) Then
+        If CamposLlenos() Then
+            clear()
+            MessageBox.Show("Se han limpiado los campos.", "Limpiar campos", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+            MessageBox.Show("No se pueden limpiar porque los estan campos vacíos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
 
-        '    MessageBox.Show("No se limpio porque tienes los campo vacio", "Clear", MessageBoxButtons.OK, MessageBoxIcon.Question)
-
-
-        'Else
-        '    MessageBox.Show("Se limpio", "Clear", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        '    Txt_apellidomaterno.Clear()
-        '    Txt_apellidopaterno.Clear()
-        '    Txt_celular.Clear()
-        '    Txt_coutacliente.Clear()
-        '    Txt_direccionfisica.Clear()
-        '    Txt_direccionpostal.Clear()
-        '    Txt_email.Clear()
-        '    Txt_id.Clear()
-        '    Txt_inicial.Clear()
-        '    Txt_nombrecompañia.Clear()
-        '    Txt_numeroid.Clear()
-        '    Txt_pueblo.Clear()
-        '    Txt_zipcode.Clear()
-
-        'End If
     End Sub
+    Private Function CamposLlenos() As Boolean
+        ' Verificar si al menos un campo de texto está lleno
+        Return Txt_apellidopaterno.Text <> "" OrElse
+               Txt_apellidomaterno.Text <> "" OrElse
+               Txt_celular.Text <> "" OrElse
+               Txt_coutacliente.Text <> "" OrElse
+               Txt_direccionfisica.Text <> "" OrElse
+               Txt_direccionpostal.Text <> "" OrElse
+               Txt_email.Text <> "" OrElse
+               Txt_inicial.Text <> "" OrElse
+               Txt_nombre.Text <> "" OrElse
+               Txt_nombrecompañia.Text <> "" OrElse
+               Txt_pueblo.Text <> "" OrElse
+               Txt_zipcode.Text <> ""
 
+    End Function
 
 End Class

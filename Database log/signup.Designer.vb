@@ -29,8 +29,8 @@ Partial Class signup
         Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Txtcontrasena = New System.Windows.Forms.TextBox()
-        Me.Txtusername = New System.Windows.Forms.TextBox()
+        Me.Txt_contrasena = New System.Windows.Forms.TextBox()
+        Me.Txt_username = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Txt_especialida = New System.Windows.Forms.TextBox()
@@ -45,7 +45,7 @@ Partial Class signup
         Me.Txt_celular = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Txt_email = New System.Windows.Forms.TextBox()
-        Me.DateTime = New System.Windows.Forms.DateTimePicker()
+        Me.Fcht = New System.Windows.Forms.DateTimePicker()
         Me.Txt_zipcode = New System.Windows.Forms.TextBox()
         Me.Txt_pueblo = New System.Windows.Forms.TextBox()
         Me.Txt_direccionpostal = New System.Windows.Forms.TextBox()
@@ -103,7 +103,7 @@ Partial Class signup
         Me.GroupBox1.Controls.Add(Me.Txt_celular)
         Me.GroupBox1.Controls.Add(Me.Label12)
         Me.GroupBox1.Controls.Add(Me.Txt_email)
-        Me.GroupBox1.Controls.Add(Me.DateTime)
+        Me.GroupBox1.Controls.Add(Me.Fcht)
         Me.GroupBox1.Controls.Add(Me.Txt_zipcode)
         Me.GroupBox1.Controls.Add(Me.Txt_pueblo)
         Me.GroupBox1.Controls.Add(Me.Txt_direccionpostal)
@@ -150,8 +150,8 @@ Partial Class signup
         Me.GroupBox3.BackgroundImage = Global.Ventagaming.My.Resources.Resources.gaming_logo_4x
         Me.GroupBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.GroupBox3.Controls.Add(Me.PictureBox1)
-        Me.GroupBox3.Controls.Add(Me.Txtcontrasena)
-        Me.GroupBox3.Controls.Add(Me.Txtusername)
+        Me.GroupBox3.Controls.Add(Me.Txt_contrasena)
+        Me.GroupBox3.Controls.Add(Me.Txt_username)
         Me.GroupBox3.Controls.Add(Me.Label14)
         Me.GroupBox3.Controls.Add(Me.Label15)
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -172,22 +172,22 @@ Partial Class signup
         Me.PictureBox1.TabIndex = 4
         Me.PictureBox1.TabStop = False
         '
-        'Txtcontrasena
+        'Txt_contrasena
         '
-        Me.Txtcontrasena.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Txtcontrasena.Location = New System.Drawing.Point(92, 49)
-        Me.Txtcontrasena.Name = "Txtcontrasena"
-        Me.Txtcontrasena.Size = New System.Drawing.Size(233, 20)
-        Me.Txtcontrasena.TabIndex = 3
-        Me.Txtcontrasena.UseSystemPasswordChar = True
+        Me.Txt_contrasena.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Txt_contrasena.Location = New System.Drawing.Point(92, 49)
+        Me.Txt_contrasena.Name = "Txt_contrasena"
+        Me.Txt_contrasena.Size = New System.Drawing.Size(233, 20)
+        Me.Txt_contrasena.TabIndex = 3
+        Me.Txt_contrasena.UseSystemPasswordChar = True
         '
-        'Txtusername
+        'Txt_username
         '
-        Me.Txtusername.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Txtusername.Location = New System.Drawing.Point(92, 23)
-        Me.Txtusername.Name = "Txtusername"
-        Me.Txtusername.Size = New System.Drawing.Size(233, 20)
-        Me.Txtusername.TabIndex = 2
+        Me.Txt_username.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Txt_username.Location = New System.Drawing.Point(92, 23)
+        Me.Txt_username.Name = "Txt_username"
+        Me.Txt_username.Size = New System.Drawing.Size(233, 20)
+        Me.Txt_username.TabIndex = 2
         '
         'Label14
         '
@@ -325,12 +325,12 @@ Partial Class signup
         Me.Txt_email.Size = New System.Drawing.Size(140, 20)
         Me.Txt_email.TabIndex = 26
         '
-        'DateTime
+        'Fcht
         '
-        Me.DateTime.Location = New System.Drawing.Point(153, 118)
-        Me.DateTime.Name = "DateTime"
-        Me.DateTime.Size = New System.Drawing.Size(123, 20)
-        Me.DateTime.TabIndex = 2
+        Me.Fcht.Location = New System.Drawing.Point(153, 118)
+        Me.Fcht.Name = "Fcht"
+        Me.Fcht.Size = New System.Drawing.Size(123, 20)
+        Me.Fcht.TabIndex = 2
         '
         'Txt_zipcode
         '
@@ -461,7 +461,7 @@ Partial Class signup
         Me.ClientSize = New System.Drawing.Size(800, 509)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Label3)
-        Me.name = "signup"
+        Me.Name = "signup"
         Me.Text = "signup"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -480,7 +480,7 @@ Partial Class signup
     Friend WithEvents Btn_clear As Button
     Friend WithEvents Btn_saves As Button
     Friend WithEvents Txt_email As TextBox
-    Friend WithEvents DateTime As DateTimePicker
+    Friend WithEvents Fcht As DateTimePicker
     Friend WithEvents Txt_departamento As TextBox
     Friend WithEvents Txt_zipcode As TextBox
     Friend WithEvents Txt_pueblo As TextBox
@@ -505,8 +505,8 @@ Partial Class signup
     Friend WithEvents Txt_especialida As TextBox
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents Txtcontrasena As TextBox
-    Friend WithEvents Txtusername As TextBox
+    Friend WithEvents Txt_contrasena As TextBox
+    Friend WithEvents Txt_username As TextBox
     Friend WithEvents Label14 As Label
     Friend WithEvents Label15 As Label
     Friend WithEvents Txt_nombre As TextBox

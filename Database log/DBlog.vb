@@ -1,7 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class DTlogin
-    Dim log As New MySqlConnection("server=localhost;username=root;password=;database=ventagaming")
+    Dim log As New MySqlConnection("server=localhost;username=root;password=;database=ventagaming2")
 
 
     'Esto es para abrir'

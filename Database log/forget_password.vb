@@ -5,11 +5,11 @@ Imports MySql.Data.MySqlClient
 
 
 Public Class forget_password
-    Dim conn As New MySqlConnection("server=localhost;username=root;password=;database=db-login")
+    Dim conn As New MySqlConnection("server=localhost;username=root;password=;database=ventagaming2")
     Dim i As Integer
 
     Private Sub BtnActualizarContraseña_Click(sender As Object, e As EventArgs) Handles Btn_saves.Click
-        Dim query As String = "UPDATE login SET password = @password WHERE username = @username"
+        Dim query As String = "UPDATE tbl_vendedor SET password = @password WHERE username = @username"
         Dim cmd As New MySqlCommand(query, conn)
         cmd.Parameters.AddWithValue("@username", Txtusername.Text)
         cmd.Parameters.AddWithValue("@password", Txtcontrasena.Text)
@@ -26,7 +26,9 @@ Public Class forget_password
             MessageBox.Show("Error al actualizar la contraseña: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             conn.Close()
+
         End Try
+        clear()
     End Sub
 
 
@@ -58,4 +60,15 @@ Public Class forget_password
             Txtcontrasena.Clear()
         End If
     End Sub
+
+    Public Sub clear()
+        Txtusername.Clear()
+        Txtcontrasena.Clear()
+
+    End Sub
+
+
+
+
+
 End Class
