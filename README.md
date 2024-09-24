@@ -1,8 +1,8 @@
 
-<h1>VentaGaming</h1>
+<h1> 🎮VentaGaming🎮</h1>
 This project is about how a vendor can create a client with a personal ID to sell items from a company that specializes in gaming products. You can also export to Excel to view the data. I use Visual Basic and MySQL with XAMPP, which is a cloud database.
 
-<h1>Installation</h1>
+<h1>Installation 🔽</h1>
 Install Visual Studio with support for Visual Basic.
 
 Install XAMPP and run it.
@@ -34,9 +34,36 @@ The Vendor can export client informacion to excel file with a button.
 
 <h1>Program Running ScreenShot:</h1>
 
-<h3>Login</h3>
+<h3>Login Screen</h3>
 
 [![Login.png](https://i.postimg.cc/vT7GBP4W/Login.png)](https://postimg.cc/PvqgVQzx)
+
+
+<h3>Sign up Account screen</h3>
+
+[![Sign-up-o-Create-account.png](https://i.postimg.cc/651sBJ3d/Sign-up-o-Create-account.png)](https://postimg.cc/56vKmr80)
+
+
+<h3>DashBoard Screen</h3>
+
+[![dashboard.png](https://i.postimg.cc/B6QtxdKQ/dashboard.png)](https://postimg.cc/DWH2hp6t)
+
+
+<h3>Create Client Screen</h3>
+
+[![client.png](https://i.postimg.cc/W150x6w3/client.png)](https://postimg.cc/hX7JdmwW)
+
+<h3>Edit Client</h3>
+
+[![edit.png](https://i.postimg.cc/sXWrtm7C/edit.png)](https://postimg.cc/KkmwTn00)
+
+
+<h3>Search Bar</h3>
+
+[![searchbar.png](https://i.postimg.cc/mD6Gzq49/searchbar.png)](https://postimg.cc/1n6dbvfR)
+
+
+
 
 
 
