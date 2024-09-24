@@ -111,24 +111,45 @@ Public Class vendedor
         Me.Hide()
     End Sub
 
-    Private Sub Txt_search_TextChanged(sender As Object, e As EventArgs) Handles Txt_search.TextChanged
-        Data.Rows.Clear()
+  Private Sub Txt_search_TextChanged(sender As Object, e As EventArgs) Handles Txt_search.TextChanged
+     ' Clear the DataTable to start fresh
+     datatable.Rows.Clear()
 
-        Try
-            conn.Open()
-            Dim cmd As New MySqlCommand("SELECT * FROM tbl_cliente WHERE id_cliente LIKE @search OR Nombre LIKE @search", conn)
-            cmd.Parameters.AddWithValue("@search", "%" & Txt_search.Text & "%")
-            dr = cmd.ExecuteReader
-            While dr.Read
-                Data.Rows.Add(dr.Item("id_cliente"), dr.Item("Apellido_paterno"), dr.Item("Apellidos_materna"), dr.Item("Nombre"), dr.Item("Inicial"), dr.Item("Dirección_fisica"), dr.Item("Dirección_postal"), dr.Item("Pueblo"), dr.Item("Zip_code"), dr.Item("Fecha_nacimiento"), dr.Item("Numero_celular"), dr.Item("Email"), dr.Item("Nombre_compañía"), dr.Item("Cuota_cliente"), dr.Item("id_vendedor"))
-            End While
-            dr.Dispose()
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        Finally
-            conn.Close()
-        End Try
-    End Sub
+     Try
+         conn.Open()
+         Dim cmd As New MySqlCommand("SELECT * FROM tbl_cliente WHERE id_cliente LIKE @search OR Nombre LIKE @search", conn)
+         cmd.Parameters.AddWithValue("@search", "%" & Txt_search.Text & "%")
+         dr = cmd.ExecuteReader()
+
+         While dr.Read()
+             datatable.Rows.Add(
+             dr.Item("id_cliente"),
+             dr.Item("Apellido_paterno"),
+             dr.Item("Apellidos_materna"),
+             dr.Item("Nombre"),
+             dr.Item("Inicial"),
+             dr.Item("Dirección_fisica"),
+             dr.Item("Dirección_postal"),
+             dr.Item("Pueblo"),
+             dr.Item("Zip_code"),
+             dr.Item("Fecha_nacimiento"),
+             dr.Item("Numero_celular"),
+             dr.Item("Email"),
+             dr.Item("Nombre_compañía"),
+             dr.Item("Cuota_cliente"),
+             dr.Item("id_vendedor")
+         )
+         End While
+         dr.Dispose()
+     Catch ex As Exception
+         MessageBox.Show("Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+     Finally
+         conn.Close()
+     End Try
+
+     ' Bind the updated DataTable to the DataGridView
+     Data.DataSource = datatable
+ End Sub
 
     Private Sub Excel_Click(sender As Object, e As EventArgs) Handles Excel.Click
 
